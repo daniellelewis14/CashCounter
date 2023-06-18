@@ -16,7 +16,7 @@ class Main {
     Currency fives = new Currency(5.0);
     Currency tens = new Currency(10.0);
     Currency twenties = new Currency(20.0);
-    Currency fifties = new Currency(0.0);
+    Currency fifties = new Currency(50.0);
     Currency hundreds = new Currency(100.0);
 
     System.out.println("Let's set up our drawer.");
@@ -45,9 +45,9 @@ class Main {
 
     double drawerTotal = pennies.totalValue() + nickels.totalValue() + dimes.totalValue() + quarters.totalValue() + ones.totalValue() + fives.totalValue() + tens.totalValue() + twenties.totalValue() + fifties.totalValue() + hundreds.totalValue();
 
-    System.out.println(drawerTotal);
+    System.out.println("\nDrawer Total: " + drawerTotal);
 
-    drawer.deposit(drawerTotal);
+    System.out.println("\n" + drawer.deposit(drawerTotal));
 
     
   }
