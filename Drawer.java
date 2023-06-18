@@ -25,6 +25,10 @@ public class Drawer {
     this.hundreds = hundreds;
   }
 
+  public double drawerTotal() {
+    return pennies.totalValue() + nickels.totalValue() + dimes.totalValue() + quarters.totalValue() + ones.totalValue() + fives.totalValue() + tens.totalValue() + twenties.totalValue() + fifties.totalValue() + hundreds.totalValue();
+  }
+
   public String deposit(double drawerTotal) {
     int hundredsDeposited = 0;
     int fiftiesDeposited = 0;
@@ -37,80 +41,77 @@ public class Drawer {
     int nickelsDeposited = 0;
     int penniesDeposited = 0;
 
-    
-    while (drawerTotal >= 400) {
-      
+    while (drawerTotal > 400) {
+
       if (drawerTotal == 400) {
-        break;
+        return "No deposit to be made.";
       }
 
       while (hundreds.count >= 1 && drawerTotal >= 500) {
-        hundreds.count =- 1;
-        drawerTotal =- 100;
+        hundreds.count -= 1;
         hundredsDeposited++;
+        drawerTotal -= 100;
       }
 
       while (fifties.count >= 1 && drawerTotal >= 450) {
-        fifties.count =-1;
-        drawerTotal =- 50;
+        fifties.count -=1;
+        drawerTotal -= 50;
         fiftiesDeposited++;
       }
-  
+
       while (twenties.count > 0 && drawerTotal >= 420) {
-        twenties.count =- 1;
-        drawerTotal =- 20;
+        twenties.count -= 1;
+        drawerTotal -= 20;
         twentiesDeposited++;
       }
-  
+
       while (tens.count >= 1 && drawerTotal >= 410) {
-        tens.count =- 1;
-        drawerTotal =- 10;
+        tens.count -= 1;
+        drawerTotal -= 10;
         tensDeposited++;
       }
-  
+
       while (fives.count >= 1 && drawerTotal >= 405) {
-        fives.count =- 1;
-        drawerTotal =- 5;
+        fives.count -= 1;
+        drawerTotal -= 5;
         fivesDeposited++;
       }
 
       while (ones.count >= 1 && drawerTotal >= 401) {
-        ones.count =- 1;
-        drawerTotal =- 1;
+        ones.count -= 1;
+        drawerTotal -= 1;
         onesDeposited++;
       }
 
       while (quarters.count >= 1 && drawerTotal >= 400.25) {
-        quarters.count =- 1;
-        drawerTotal =- 0.25;
+        quarters.count -= 1;
+        drawerTotal -= 0.25;
         quartersDeposited++;
       }
 
       while (dimes.count >= 1 && drawerTotal >= 400.10) {
-        dimes.count =- 1;
-        drawerTotal =- 0.10;
+        dimes.count -= 1;
+        drawerTotal -= 0.10;
         dimesDeposited++;
       }
 
       while (nickels.count >= 1 && drawerTotal >= 400.05) {
-        nickels.count =- 1;
-        drawerTotal =- 0.05;
+        nickels.count -= 1;
+        drawerTotal -= 0.05;
         nickelsDeposited++;
       }
 
       while (pennies.count >= 1 && drawerTotal >= 400.01) {
-        pennies.count =- 1;
-        drawerTotal =- 0.01;
+        pennies.count -= 1;
+        drawerTotal -= 0.01;
         penniesDeposited++;
       }
-      
     }
 
     String depositSummary = "Pennies: " + penniesDeposited + "\n" + "Nickels: " + nickelsDeposited + "\n" + "Dimes: " + dimesDeposited + "\n" + "Quarters: " + quartersDeposited + "\n" + "Dollars: " + onesDeposited + "\n" + "Fives: " + fivesDeposited + "\n" + "Tens: " + tensDeposited + "\n" + "Twenties: " + twentiesDeposited + "\n" + "Fiftys: " + fiftiesDeposited + "\n" + "Hundreds: " + hundredsDeposited + "\n";
     double totalDeposit = (hundredsDeposited * 100) + (fiftiesDeposited * 50) + (twentiesDeposited * 20) + (tensDeposited * 10) + (fivesDeposited * 5) + (onesDeposited * 1) + (quartersDeposited * 0.25) + (dimesDeposited * 0.10) + (nickelsDeposited * 0.05) + (penniesDeposited * 0.01);
     
-
-    return "Deposit Summary: \n" + depositSummary + "\nTotal Deposit: " + totalDeposit; 
+    return "Deposit Summary: \n" + depositSummary + "\nTotal Deposit: " + totalDeposit;
   
   }
   
