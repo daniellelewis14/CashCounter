@@ -34,11 +34,9 @@ class Main {
     
     Drawer drawer = new Drawer(pennies, nickels, dimes, quarters, ones, fives, tens, twenties, fifties, hundreds);
 
-    System.out.println("Ones in drawer: " + drawer.howManyInDrawer(ones));
+    System.out.println("\nDrawer Total: " + drawer.drawerTotal());
 
-    System.out.println("Drawer Total: " + drawer.drawerTotal());
-
-    drawer.deposit();
+    System.out.println(drawer.deposit());
 
     
   }
