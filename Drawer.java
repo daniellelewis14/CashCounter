@@ -41,6 +41,8 @@ public class Drawer {
   //- CURRENTLY NOT WORKING
   public String deposit() {
     double drawerTotal = this.drawerTotal();
+
+    //Create variables to hold the number of each currency deposited
     int hundredsDeposited = 0;
     int fiftiesDeposited = 0;
     int twentiesDeposited = 0;
@@ -51,6 +53,8 @@ public class Drawer {
     int dimesDeposited = 0;
     int nickelsDeposited = 0;
     int penniesDeposited = 0;
+
+    //Variables to return the results of the deposit
     String depositSummary = "Pennies: " + penniesDeposited + "\n" + "Nickels: " + nickelsDeposited + "\n" + "Dimes: " + dimesDeposited + "\n" + "Quarters: " + quartersDeposited + "\n" + "Dollars: " + onesDeposited + "\n" + "Fives: " + fivesDeposited + "\n" + "Tens: " + tensDeposited + "\n" + "Twenties: " + twentiesDeposited + "\n" + "Fiftys: " + fiftiesDeposited + "\n" + "Hundreds: " + hundredsDeposited + "\n";
     double totalDeposit = (hundredsDeposited * 100) + (fiftiesDeposited * 50) + (twentiesDeposited * 20) + (tensDeposited * 10) + (fivesDeposited * 5) + (onesDeposited * 1) + (quartersDeposited * 0.25) + (dimesDeposited * 0.10) + (nickelsDeposited * 0.05) + (penniesDeposited * 0.01);
 
