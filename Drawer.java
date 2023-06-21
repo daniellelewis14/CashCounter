@@ -32,11 +32,6 @@ public class Drawer {
     return pennies.totalValue() + nickels.totalValue() + dimes.totalValue() + quarters.totalValue() + ones.totalValue() + fives.totalValue() + tens.totalValue() + twenties.totalValue() + fifties.totalValue() + hundreds.totalValue();
   }
 
-  //To test if the currect amount of each currency was added to the drawer
-  public int howManyInDrawer(Currency currency) {
-    return currency.howMany();
-  }
-
   //Making deposits and printing the results of the deposit 
 
   public String deposit() {
@@ -53,6 +48,16 @@ public class Drawer {
     int dimesDeposited = 0;
     int nickelsDeposited = 0;
     int penniesDeposited = 0;
+    int originalPennies = pennies.count;
+    int originalNickels = nickels.count;
+    int originalDimes = dimes.count;
+    int originalQuarters = quarters.count;
+    int originalOnes = ones.count;
+    int originalFives = fives.count;
+    int originalTens = tens.count;
+    int originalTwenties = twenties.count;
+    int originalFifties = fifties.count;
+    int originalHundreds = hundreds.count;
 
 
     while (drawerTotal > 400.0) {
@@ -120,13 +125,22 @@ public class Drawer {
         drawerTotal -= 0.01;
         penniesDeposited++;
       }
+      
       break;
     } 
 
-    //Variables to return the results of the deposit
+    //Returns the number of each denomination deposited
     String depositSummary = "\nPennies: " + penniesDeposited + "\n" + "Nickels: " + nickelsDeposited + "\n" + "Dimes: " + dimesDeposited + "\n" + "Quarters: " + quartersDeposited + "\n" + "Dollars: " + onesDeposited + "\n" + "Fives: " + fivesDeposited + "\n" + "Tens: " + tensDeposited + "\n" + "Twenties: " + twentiesDeposited + "\n" + "Fifties: " + fiftiesDeposited + "\n" + "Hundreds: " + hundredsDeposited + "\n";
+
+    //Returns the value of the total deposit
     double totalDeposit = (hundredsDeposited * 100) + (fiftiesDeposited * 50) + (twentiesDeposited * 20) + (tensDeposited * 10) + (fivesDeposited * 5) + (onesDeposited * 1) + (quartersDeposited * 0.25) + (dimesDeposited * 0.10) + (nickelsDeposited * 0.05) + (penniesDeposited * 0.01);
-    return "\nDeposit Summary: \n" + depositSummary + "\nTotal Deposit: " + totalDeposit;
+
+    //Returns the number of each denomination remaining in the drawer after the deposit
+    String remainingInDrawer = "\nPennies: " + (originalPennies - penniesDeposited) + "\n" + "Nickels: " + 
+(originalNickels - nickelsDeposited) + "\n" + "Dimes: " + (originalDimes - dimesDeposited) + "\n" + "Quarters: " + (originalQuarters - quartersDeposited) + "\n" + "Dollars: " +(originalOnes - onesDeposited) + "\n" + "Fives: " + (originalFives - fivesDeposited) + "\n" + "Tens: " + (originalTens - tensDeposited) + "\n" + "Twenties: " + (originalTwenties - twentiesDeposited) + "\n" + "Fifties: " + (originalFifties - fiftiesDeposited) + "\n" + "Hundreds: " + (originalHundreds - hundredsDeposited) + "\n";
+
+    //Return statement formatted to give the final results of the deposit
+    return "\nDeposit Summary: \n" + depositSummary + "\nTotal Deposit: " + totalDeposit + "\n" + "\nRemaining in drawer:\n" + remainingInDrawer;
 
   }
 
