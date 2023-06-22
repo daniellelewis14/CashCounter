@@ -7,6 +7,7 @@ class Main {
   public static void main(String[] args) {
     
     Scanner scanner = new Scanner(System.in);
+
     Safe safe = new Safe();
     
     //Create denominations from Currency class
@@ -33,6 +34,7 @@ class Main {
     System.out.print("How many Hundred dollar bills?: ");
     Currency pos1Hundreds = new Currency(100.0, scanner.nextInt());
 
+  
     //Adds user-eneterd currency to drawer 1
     Drawer drawer1 = new Drawer(pos1Pennies, pos1Nickels, pos1Dimes, pos1Quarters, pos1Ones, pos1Fives, pos1Tens, pos1Twenties, pos1Fifties, pos1Hundreds);
 
@@ -129,9 +131,6 @@ class Main {
     System.out.println("\nDrawer Total: " + drawer4.drawerTotal());
 
     System.out.println(drawer4.deposit());
-
-    
-
     
   }
 }

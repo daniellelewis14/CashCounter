@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.math.BigDecimal;
 
 public class Drawer {
   public Currency pennies;
@@ -28,26 +29,43 @@ public class Drawer {
   }
 
   //Returns the total value of the drawer contents
-  public double drawerTotal() {
-    return pennies.totalValue() + nickels.totalValue() + dimes.totalValue() + quarters.totalValue() + ones.totalValue() + fives.totalValue() + tens.totalValue() + twenties.totalValue() + fifties.totalValue() + hundreds.totalValue();
+  public BigDecimal drawerTotal() {
+    ArrayList<BigDecimal> bdList = new ArrayList<>();
+    bdList.add(pennies.totalValue());
+    bdList.add(nickels.totalValue());
+    bdList.add(dimes.totalValue());
+    bdList.add(quarters.totalValue());
+    bdList.add(ones.totalValue());
+    bdList.add(fives.totalValue());
+    bdList.add(tens.totalValue());
+    bdList.add(twenties.totalValue());
+    bdList.add(fifties.totalValue());
+    bdList.add(hundreds.totalValue());
+    BigDecimal bdTotal = BigDecimal.ZERO;
+    for (BigDecimal value: bdList) {
+      if (value != null) {
+        bdTotal = bdTotal.add(value);
+      }
+    }
+    return bdTotal;
   }
 
   //Making deposits and printing the results of the deposit 
 
   public String deposit() {
-    double drawerTotal = this.drawerTotal();
+    double drawerTotal = drawerTotal().doubleValue();
 
     //Create variables to hold the number of each currency deposited
-    int hundredsDeposited = 0;
-    int fiftiesDeposited = 0;
-    int twentiesDeposited = 0;
-    int tensDeposited = 0;
-    int fivesDeposited = 0;
-    int onesDeposited = 0;
-    int quartersDeposited = 0;
-    int dimesDeposited = 0;
-    int nickelsDeposited = 0;
-    int penniesDeposited = 0;
+    Currency hundredsDeposited = new Currency(100.0, 0);
+    Currency fiftiesDeposited = new Currency(50.0, 0);
+    Currency twentiesDeposited = new Currency(20.0, 0);
+    Currency tensDeposited = new Currency(10.0, 0);
+    Currency fivesDeposited = new Currency(5.0, 0);
+    Currency onesDeposited = new Currency(1.0, 0);
+    Currency quartersDeposited = new Currency(0.25, 0);
+    Currency dimesDeposited = new Currency(0.10, 0);
+    Currency nickelsDeposited = new Currency(0.05, 0);
+    Currency penniesDeposited = new Currency(0.01, 0);
     int originalPennies = pennies.count;
     int originalNickels = nickels.count;
     int originalDimes = dimes.count;
@@ -60,7 +78,7 @@ public class Drawer {
     int originalHundreds = hundreds.count;
 
 
-    while (drawerTotal > 400.0) {
+     while (drawerTotal > 400.0) {
 
       if (drawerTotal == 400.0) {
         return "No deposit to be made";
@@ -68,79 +86,83 @@ public class Drawer {
 
       while (hundreds.count >= 1 && drawerTotal >= 500.0) {
         hundreds.count -= 1;
-        hundredsDeposited++;
+        hundredsDeposited.count++;
         drawerTotal -= 100;
       } 
 
       while (fifties.count >= 1 && drawerTotal >= 450.0) {
         fifties.count -=1;
         drawerTotal -= 50;
-        fiftiesDeposited++;
+        fiftiesDeposited.count++;
       } 
 
       while (twenties.count > 0 && drawerTotal >= 420.0) {
         twenties.count -= 1;
         drawerTotal -= 20;
-        twentiesDeposited++;
+        twentiesDeposited.count++;
       } 
 
       while (tens.count >= 1 && drawerTotal >= 410.0) {
         tens.count -= 1;
         drawerTotal -= 10;
-        tensDeposited++;
+        tensDeposited.count++;
       } 
 
       while (fives.count >= 1 && drawerTotal >= 405.0) {
         fives.count -= 1;
         drawerTotal -= 5;
-        fivesDeposited++;
+        fivesDeposited.count++;
       } 
 
       while (ones.count >= 1 && drawerTotal >= 401) {
         ones.count -= 1;
         drawerTotal -= 1;
-        onesDeposited++;
+        onesDeposited.count++;
       } 
 
       while (quarters.count >= 1 && drawerTotal >= 400.25) {
         quarters.count -= 1;
         drawerTotal -= 0.25;
-        quartersDeposited++;
+        quartersDeposited.count++;
       } 
 
       while (dimes.count >= 1 && drawerTotal >= 400.10) {
         dimes.count -= 1;
         drawerTotal -= 0.10;
-        dimesDeposited++;
+        dimesDeposited.count++;
       } 
 
       while (nickels.count >= 1 && drawerTotal >= 400.05) {
         nickels.count -= 1;
         drawerTotal -= 0.05;
-        nickelsDeposited++;
+        nickelsDeposited.count++;
       } 
 
       while (pennies.count >= 1 && drawerTotal >= 400.01) {
         pennies.count -= 1;
         drawerTotal -= 0.01;
-        penniesDeposited++;
+        penniesDeposited.count++;
       }
       
+      //safe.addToSafe(penniesDeposited, nickelsDeposited, dimesDeposited, quartersDeposited, onesDeposited, fivesDeposited, tensDeposited, twentiesDeposited, fiftiesDeposited, hundredsDeposited);
+      
       break;
+      
     } 
 
     //Returns the number of each denomination deposited
-    String depositSummary = "\nPennies: " + penniesDeposited + "\n" + "Nickels: " + nickelsDeposited + "\n" + "Dimes: " + dimesDeposited + "\n" + "Quarters: " + quartersDeposited + "\n" + "Dollars: " + onesDeposited + "\n" + "Fives: " + fivesDeposited + "\n" + "Tens: " + tensDeposited + "\n" + "Twenties: " + twentiesDeposited + "\n" + "Fifties: " + fiftiesDeposited + "\n" + "Hundreds: " + hundredsDeposited + "\n";
+    String depositSummary = "\nPennies: " + penniesDeposited.count + "\n" + "Nickels: " + nickelsDeposited.count + "\n" + "Dimes: " + dimesDeposited.count + "\n" + "Quarters: " + quartersDeposited.count + "\n" + "Dollars: " + onesDeposited.count + "\n" + "Fives: " + fivesDeposited.count + "\n" + "Tens: " + tensDeposited.count + "\n" + "Twenties: " + twentiesDeposited.count + "\n" + "Fifties: " + fiftiesDeposited.count + "\n" + "Hundreds: " + hundredsDeposited.count + "\n";
 
     //Returns the value of the total deposit
-    double totalDeposit = (hundredsDeposited * 100) + (fiftiesDeposited * 50) + (twentiesDeposited * 20) + (tensDeposited * 10) + (fivesDeposited * 5) + (onesDeposited * 1) + (quartersDeposited * 0.25) + (dimesDeposited * 0.10) + (nickelsDeposited * 0.05) + (penniesDeposited * 0.01);
+    double totalDeposit = (hundredsDeposited.count * 100) + (fiftiesDeposited.count * 50) + (twentiesDeposited.count * 20) + (tensDeposited.count * 10) + (fivesDeposited.count * 5) + (onesDeposited.count * 1) + (quartersDeposited.count * 0.25) + (dimesDeposited.count * 0.10) + (nickelsDeposited.count * 0.05) + (penniesDeposited.count * 0.01);
+    BigDecimal bdTotalDeposit = BigDecimal.valueOf(totalDeposit);
 
     //Returns the number of each denomination remaining in the drawer after the deposit
-    String remainingInDrawer = "\nPennies: " + (originalPennies - penniesDeposited) + "\n" + "Nickels: " + 
-(originalNickels - nickelsDeposited) + "\n" + "Dimes: " + (originalDimes - dimesDeposited) + "\n" + "Quarters: " + (originalQuarters - quartersDeposited) + "\n" + "Dollars: " +(originalOnes - onesDeposited) + "\n" + "Fives: " + (originalFives - fivesDeposited) + "\n" + "Tens: " + (originalTens - tensDeposited) + "\n" + "Twenties: " + (originalTwenties - twentiesDeposited) + "\n" + "Fifties: " + (originalFifties - fiftiesDeposited) + "\n" + "Hundreds: " + (originalHundreds - hundredsDeposited) + "\n";
+    String remainingInDrawer = "\nPennies: " + (originalPennies - penniesDeposited.count) + "\n" + "Nickels: " + 
+(originalNickels - nickelsDeposited.count) + "\n" + "Dimes: " + (originalDimes - dimesDeposited.count) + "\n" + "Quarters: " + (originalQuarters - quartersDeposited.count) + "\n" + "Dollars: " +(originalOnes - onesDeposited.count) + "\n" + "Fives: " + (originalFives - fivesDeposited.count) + "\n" + "Tens: " + (originalTens - tensDeposited.count) + "\n" + "Twenties: " + (originalTwenties - twentiesDeposited.count) + "\n" + "Fifties: " + (originalFifties - fiftiesDeposited.count) + "\n" + "Hundreds: " + (originalHundreds - hundredsDeposited.count) + "\n";
 
     //Return statement formatted to give the final results of the deposit
-    return "\nDeposit Summary: \n" + depositSummary + "\nTotal Deposit: " + totalDeposit + "\n" + "\nRemaining in drawer:\n" + remainingInDrawer;
+    return "\nDeposit Summary: \n" + depositSummary + "\nTotal Deposit: " + bdTotalDeposit + "\n" + "\nRemaining in drawer:\n" + remainingInDrawer;
 
   }
 

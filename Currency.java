@@ -1,3 +1,4 @@
+import java.math.BigDecimal;
 public class Currency {
   public int count;
   public double value;
@@ -15,9 +16,10 @@ public class Currency {
   }
   
   //Returns the total value of an individual coin or bill
-  public double totalValue() {
+  public BigDecimal totalValue() {
     double total = this.value * this.count;
-    return total;
+    BigDecimal bdTotal = BigDecimal.valueOf(total);
+    return bdTotal;
   }
 
   //Returns how many of each coin or bill is held in each object
